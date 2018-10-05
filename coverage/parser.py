@@ -151,6 +151,8 @@ class PythonParser(object):
                     # Class definitions look like branches in the bytecode, so
                     # we need to exclude them.  The simplest way is to note the
                     # lines with the 'class' keyword.
+                    # FARAH: exclude the class definition line
+                    self.raw_excluded.add(slineno)
                     self.raw_classdefs.add(slineno)
             elif toktype == token.OP:
                 if ttext == ':':
@@ -193,8 +195,9 @@ class PythonParser(object):
                     # statement.
                     first_line = slineno
                     # Check whether to end an excluded suite.
-                    if excluding and indent <= exclude_indent:
-                        excluding = False
+                    # FARAH: deleted those for better coverage reporting
+                    # if excluding and indent <= exclude_indent:
+                    #     excluding = False
                     if excluding:
                         self.raw_excluded.add(elineno)
                     first_on_line = False
