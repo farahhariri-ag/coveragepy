@@ -196,10 +196,10 @@ class PythonParser(object):
                     first_line = slineno
                     # Check whether to end an excluded suite.
                     # FARAH: deleted those for better coverage reporting
-                    # if excluding and indent <= exclude_indent:
-                    #     excluding = False
-                    if excluding:
-                        self.raw_excluded.add(elineno)
+                    if excluding and indent <= exclude_indent:
+                        excluding = False
+                    # if excluding:
+                    #     self.raw_excluded.add(elineno)
                     first_on_line = False
 
             prev_toktype = toktype
